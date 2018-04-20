@@ -1,4 +1,4 @@
-I = double(imread('boats.bmp'));
+I = double(imread('test_images/lena512.bmp'));
 I = I./ 255;
 v = var(I(:));
 disp(v);
