@@ -12,4 +12,25 @@ north = zeros(size(j,1), size(j,2));
 
     del_j_south = south - j;
 
+    % West Gradient.
+    west = zeros(size(j,1), size(j,2)); 
+    west(:, 2:end) =  j(:, 1:end-1) ;
+    west(:, 1) = j(:, 1); 
 
+    del_j_west = west - j;
+
+    % East Gradient.
+    east = zeros(size(j,1), size(j,2));
+    east(:, 1:end-1) =  j(:, 2:end);
+    east(:, end) = j(:, end); 
+
+    del_j_east = east - j;
+
+    %%% Calculate Diffusion Coefficients.
+    cn = exp(-(del_j_north./k).^2);
+    cs = exp(-(del_j_south./k).^2);
+    ce = exp(-(del_j_east./k).^2);
+    cw = exp(-(del_j_west./k).^2);
+    
+    % Update the image on this iteration. 
+    res = lambda.*(cn.*del_j_north + cs.*del_j_south + ce.*del_j_east + cw.*del_j_west);

@@ -24,11 +24,11 @@ lambda1 = 40;
 lambda2 = 1;
 tau = 0.0001;
 bsigma = imgaussfilt(b,sigma);
-pmb = dip_paper(bsigma,k, lambda2);
+pmb = PMdiffuse(bsigma,k, lambda2);
 
 for iter = 1:500
     usigma = imgaussfilt(u,sigma);
-    pmu = dip_paper(usigma,k, lambda1);
+    pmu = PMdiffuse(usigma,k, lambda1);
     f_term = immultiply(b,pmu);
     s_term = immultiply(u,pmb);
     add_term = imadd(f_term, s_term).*tau;
