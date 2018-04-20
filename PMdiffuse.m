@@ -1,5 +1,16 @@
 function res = PMdiffuse(j,k, lambda)
-north = zeros(size(j,1), size(j,2)); 
+% k controls conduction as a function of gradient.  If kappa is low
+% small intensity gradients are able to block conduction and hence diffusion
+% across step edges.  A large value reduces the influence of intensity
+% gradients on conduction.
+%
+% lambda controls speed of diffusion
+%
+% Returns:
+%   res - diffused image after single iteration
+
+    % North Gradient %
+    north = zeros(size(j,1), size(j,2)); 
     north(2:end, 1:end) =  j(1:end-1, 1:end) ;
     north(1, :) = j(1, :); 
     
