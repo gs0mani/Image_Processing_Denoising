@@ -1,10 +1,10 @@
-I = double(imread('test_images/lena512.bmp'));
+I = double(imread('test_images/girlface.bmp'));
 I = I./ 255;
 v = var(I(:));
-%disp(v);
+disp(v);
 
 %u = imnoise(I, 'gaussian', sqrt(v));
-u = I + randn(size(I)) .* 0.15;
+u = I + randn(size(I)) .* (5*v);
 u(u < 0) = 0;
 u(u > 1) = 1;
 
@@ -20,10 +20,10 @@ b = wdencmp('gbl',x,wv,level,thr,sorh,keepapp);
 %subplot(2,2,3), imshow(b);
 mkdir('Projects/Image_Processing_Denoising/noised_images');
 mkdir('Projects/Image_Processing_Denoising/denoised_soft');
-imwrite(u, 'Projects/Image_Processing_Denoising/noised_images/lena512_noised.bmp');
-imwrite(b, 'Projects/Image_Processing_Denoising/denoised_soft/lena512_soft.bmp');
+imwrite(u, 'Projects/Image_Processing_Denoising/noised_images/girlface_noised.bmp');
+imwrite(b, 'Projects/Image_Processing_Denoising/denoised_soft/girlface_soft.bmp');
 
-sigma = 0.0352;
+sigma = v;
 k = 60;
 lambda1 = 40;
 lambda2 = 1;
@@ -42,4 +42,4 @@ end
 
 %subplot(2,2,4), imshow(u);
 mkdir('Projects/Image_Processing_Denoising/denoised_diffused');
-imwrite(u, 'Projects/Image_Processing_Denoising/denoised_diffused/lena512_diffused.bmp');
+imwrite(u, 'Projects/Image_Processing_Denoising/denoised_diffused/girlface_diffused.bmp');
